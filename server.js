@@ -253,6 +253,18 @@ app.get("/getconversation", requireAuth, async (req, res) => {
   }
 });
 
+// TEMPORARY ROUTE TO CLEAR DATABASE - REMOVE AFTER USE
+app.post("/reset-database", async (req, res) => {
+  try {
+    await pool.query("DELETE FROM chathistory");
+    await pool.query("DELETE FROM conversation");
+    await pool.query("DELETE FROM users");
+    res.json({ success: true, message: "Database cleared successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // GET SPECIFIC CONVERSATION MESSAGES
 app.get("/getconversation/:conversationId/messages", requireAuth, async (req, res) => {
   try {
