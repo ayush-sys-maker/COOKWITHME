@@ -8,18 +8,42 @@ const { Pool } = require("pg");
 
 dotenv.config();
 
-const app = express();
-
-// Database configuration - USE THIS SINGLE POOL
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false } // Always use SSL in production
+// Check critical environment variables
+console.log('🔧 Environment check:', {
+  hasDatabaseUrl: !!process.env.DATABASE_URL,
+  hasOpenRouterKey: !!process.env.OPENROUTER_API_KEY,
+  nodeEnv: process.env.NODE_ENV
 });
 
+const app = express();
 
-// Table creation function - ADD THIS AFTER POOL IS DEFINED
+// Database configuration
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
+
+// Table creation function - UPDATED WITH DEBUGGING
 const createTables = async () => {
+  console.log('🔧 Attempting database connection...');
+  
   try {
+    // Test if DATABASE_URL is set
+    if (!process.env.DATABASE_URL) {
+      console.log('❌ DATABASE_URL environment variable is missing');
+      console.log('💡 Please set DATABASE_URL in Render environment variables');
+      return;
+    }
+    console.log('✅ DATABASE_URL is set');
+
+    // Test database connection
+    console.log('🔧 Testing database connection...');
+    const client = await pool.connect();
+    console.log('✅ Database connected successfully');
+    client.release();
+
+    // Create tables
+    console.log('🔧 Creating tables...');
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -28,6 +52,7 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+    console.log('✅ Users table created/verified');
     
     await pool.query(`
       CREATE TABLE IF NOT EXISTS conversation (
@@ -37,6 +62,7 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+    console.log('✅ Conversation table created/verified');
     
     await pool.query(`
       CREATE TABLE IF NOT EXISTS chathistory (
@@ -48,16 +74,20 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+    console.log('✅ Chathistory table created/verified');
     
-    console.log('✅ Database tables created successfully');
+    console.log('🎉 All database tables created successfully');
   } catch (error) {
-    console.log('⚠️ Tables might already exist:', error.message);
+    console.log('❌ Database error:', error.message);
+    console.log('Error details:', {
+      code: error.code,
+      detail: error.detail
+    });
   }
 };
 
 // Call this function when server starts
 createTables();
-
 
 // CORS - Update for production
 app.use(cors({
@@ -91,7 +121,7 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-// Database helper - USE THIS INSTEAD OF chatdata.js and data.js
+// Database helper
 const db = {
   query: (text, params) => pool.query(text, params),
   
@@ -139,7 +169,7 @@ app.post("/signup", async (req, res) => {
     res.json({ success: true, user: req.session.user });
 
   } catch (error) {
-    console.error(error);
+    console.error("Signup error:", error);
     res.status(500).json({ error: "Error in sign up" });
   }
 });
@@ -334,7 +364,7 @@ app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": process.env.NODE_ENV === 'production' ? 'https://your-app.netlify.app' : 'http://localhost:3000',
+          "HTTP-Referer": process.env.NODE_ENV === 'production' ? 'https://effulgent-raindrop-f9ddee.netlify.app' : 'http://localhost:3000',
           "X-Title": "Cooking Assistant"
         }
       }
