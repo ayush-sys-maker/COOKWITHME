@@ -112,7 +112,8 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
 
     const checkAuth = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/check-auth', { withCredentials: true });
+            // ✅ FIXED: Changed to Render URL
+            const response = await axios.get('https://cookwithme.onrender.com/check-auth', { withCredentials: true });
             if (!response.data.islogin) {
                 speak("Please login first");
                 return  false ;

@@ -25,7 +25,8 @@ function Home() {
   useEffect(() => {
     const init = async () => {
       try {
-        const authResponse = await axios.get("http://localhost:3001/check-auth", {
+        // ✅ FIXED: Changed to Render URL
+        const authResponse = await axios.get("https://cookwithme.onrender.com/check-auth", {
           withCredentials: true
         });
 
@@ -53,7 +54,8 @@ function Home() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get("http://localhost:3001/getconversation", {
+      // ✅ FIXED: Changed to Render URL
+      const response = await axios.get("https://cookwithme.onrender.com/getconversation", {
         withCredentials: true
       });
 
@@ -80,8 +82,9 @@ function Home() {
 
     try {
       setLoading(true);
+      // ✅ FIXED: Changed to Render URL
       const response = await axios.get(
-        `http://localhost:3001/getconversation/${conversationId}/messages`,
+        `https://cookwithme.onrender.com/getconversation/${conversationId}/messages`,
         { withCredentials: true }
       );
 
@@ -145,8 +148,9 @@ function Home() {
         isTemp: true
       }]);
   
+      // ✅ FIXED: Changed to Render URL
       const response = await axios.post(
-        "http://localhost:3001/ask-cooking-assistant",
+        "https://cookwithme.onrender.com/ask-cooking-assistant",
         {
           question: userQuestion,
           conversationId: currentConversation?.id,
@@ -198,7 +202,8 @@ function Home() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/logout', {}, { withCredentials: true });
+      // ✅ FIXED: Changed to Render URL
+      const response = await axios.post('https://cookwithme.onrender.com/logout', {}, { withCredentials: true });
       setUser(null);
       setConversations([]);
       setCurrentConversation(null);
