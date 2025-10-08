@@ -29,7 +29,7 @@ function Signup() {
       
       if (response.data.success) {
         alert("🎉 Signup successful! Please login.");
-        window.location.href = '/login'; 
+        window.location.href = '/'; 
       }
       
     } catch (error) {
