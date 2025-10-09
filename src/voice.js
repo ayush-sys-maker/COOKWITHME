@@ -40,7 +40,7 @@ function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onS
 
     const askGemini = async (query) => {
       try {
-        const response = await axios.post('http://localhost:3001/ask-cooking-assistant', {
+        const response = await axios.post('https://cookwithme.onrender.com/ask-cooking-assistant', {
           question: query,
           conversationId: currentConversation?.id || null,
           language: 'en'
