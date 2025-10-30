@@ -90,10 +90,15 @@ const createTables = async () => {
 createTables();
 
 // CORS - Update for production
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? [
+      "dashing-muffin-5f5039.netlify.app",
+      "https://cookwithme.onrender.com"
+    ]
+  : ["http://localhost:3000"];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? true  // Allow all origins in production for now
-    : "http://localhost:3000",
+  origin: allowedOrigins,
   credentials: true
 }));
 
