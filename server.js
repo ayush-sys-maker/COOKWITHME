@@ -90,7 +90,7 @@ const createTables = async () => {
 createTables();
 const allowedOrigins = process.env.NODE_ENV === 'production' 
   ? [
-      "https://dashing-muffin-5f5039.netlify.app", // ✅ added https://
+      "https://cookwithayush.netlify.app", // ✅ added https://
       "https://cookwithme.onrender.com"
     ]
   : ["http://localhost:3000"];
