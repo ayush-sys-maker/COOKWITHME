@@ -88,14 +88,13 @@ const createTables = async () => {
 
 // Call this function when server starts
 createTables();
-
-// CORS - Update for production
 const allowedOrigins = process.env.NODE_ENV === 'production' 
   ? [
-      "dashing-muffin-5f5039.netlify.app",
+      "https://dashing-muffin-5f5039.netlify.app", // ✅ added https://
       "https://cookwithme.onrender.com"
     ]
   : ["http://localhost:3000"];
+
 
 app.use(cors({
   origin: allowedOrigins,
@@ -117,6 +116,11 @@ app.use(session({
     secure: process.env.NODE_ENV === 'production'
   }
 }));
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 
 // Middleware to check authentication
 const requireAuth = (req, res, next) => {
@@ -419,6 +423,11 @@ app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
     return res.status(500).json({ error: "Failed to process request" });
   }
 });
+
+app.get("/", (req, res) => {
+  res.send("🍳 CookWithMe backend running successfully!");
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
