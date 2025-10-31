@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+🍳 Cooking Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A smart recipe and meal planning web app built using the MERN stack (MongoDB, Express, React, Node.js).
+Cooking Assistant helps users find, save, and organize recipes easily — making cooking simpler and more enjoyable.
 
-## Available Scripts
+🚀 Tech Stack
+Technology	Purpose
+MongoDB	Database for storing user data and recipes
+Express.js	Backend framework for APIs
+React.js	Frontend library for UI
+Node.js	Runtime environment for the backend
+Bootstrap / CSS	Styling and responsive design
+✨ Features
 
-In the project directory, you can run:
+👨‍🍳 Recipe Search – Find recipes based on ingredients or dish names
 
-### `npm start`
+📜 Recipe Details – View ingredients, steps, and cooking time
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+💾 Save Recipes – Add favorites to your personal collection
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+🍽️ Meal Planner – Organize meals for the week
 
-### `npm test`
+🔐 User Authentication – Login and register using JWT
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📱 Responsive Design – Works perfectly on all devices
 
-### `npm run build`
+📁 Folder Structure
+cooking-assistant/
+│
+├── client/              # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── App.js
+│   │   └── index.js
+│   └── package.json
+│
+├── server/              # Express backend
+│   ├── models/
+│   ├── routes/
+│   ├── controllers/
+│   ├── server.js
+│   └── package.json
+│
+└── README.md
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+⚙️ Installation
+1. Clone the repository
+git clone https://github.com/your-username/cooking-assistant.git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies
+cd cooking-assistant/client
+npm install
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+cd ../server
+npm install
 
-### `npm run eject`
+3. Set up environment variables
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Create a .env file inside the server folder:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Run the app
+# Run frontend and backend together
+npm run dev
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🌐 Deployment
 
-## Learn More
+Frontend: Netlify / Vercel
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Backend: Render / Railway / Heroku
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Database: MongoDB Atlas
 
-### Code Splitting
+📸 Preview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+(Add a screenshot or GIF of your app here)
+![Cooking Assistant Screenshot](client/src/assets/preview.png)
 
-### Analyzing the Bundle Size
+🧑‍💻 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Ayush Pareek
+📍 Thrissur, Kerala
+💬 Passionate Full Stack Developer
