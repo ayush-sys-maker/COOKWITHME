@@ -585,8 +585,6 @@ margin-left: 10px;
 /* Smaller Logout button on phones */
 @media (max-width: 576px) {
   .outbtn {
-    font-size: 12px;
-    padding: 6px 10px;
-    border-radius: 4px;
+    display: none;
   }
 }

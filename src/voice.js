@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-
-
 function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onSetCurrentConversation, onRefreshConversations, onRefreshMessages }){
     const [isRecording,setIsRecording] = useState(false);
     const [question,setQuestion] = useState('');
     const [answer,setAnswer] = useState('');
     const [isSpeaking,setIsSpeaking] = useState(false);
 
+    // Use REACT_APP_API_URL or fallback to localhost backend
+    const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
     const speak = (text) => {
+      if (!('speechSynthesis' in window)) {
+        console.warn('Speech synthesis not supported');
+        return;
+      }
       window.speechSynthesis.cancel(); // Cancel any ongoing speech
       const utterance = new SpeechSynthesisUtterance(text);
    
@@ -20,8 +25,8 @@ function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onS
     
       utterance.onend = () => {
         setIsSpeaking(false);
-        if (isRecording) { // Only restart if we should be listening
-          recognitionRef.current.start(); // Resume listening
+        if (isRecording && recognitionRef.current) { // Only restart if we should be listening
+          try { recognitionRef.current.start(); } catch (e) { /* ignore */ }
         }
       };
     
@@ -31,16 +36,16 @@ function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onS
     useEffect(() => {
       return () => {
         if (recognitionRef.current) {
-          recognitionRef.current.stop();
+          try { recognitionRef.current.stop(); } catch (e) {}
         }
-        window.speechSynthesis.cancel();
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
       };
     }, []);
 
 
     const askGemini = async (query) => {
       try {
-        const response = await axios.post('https://cookwithme.onrender.com/ask-cooking-assistant', {
+        const response = await axios.post(`${API_BASE}/ask-cooking-assistant`, {
           question: query,
           conversationId: currentConversation?.id || null,
           language: 'en'
@@ -70,7 +75,7 @@ function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onS
         setAnswer(data.answer);
         if (onAnswerChange) onAnswerChange(data.answer);
         try{
-        speak(data.answer);
+          speak(data.answer);
         }catch(error){
           console.log(error)
         }
@@ -87,42 +92,44 @@ function VoiceInput({ onQuestionChange, onAnswerChange, currentConversation, onS
     
 const handleListen = () =>{
     if('webkitSpeechRecognition' in window){
-        const recoginition = new window.webkitSpeechRecognition();
-        recognitionRef.current = recoginition;
-        recoginition.continuous = true;
-        recoginition.lang = 'en-US';
-        recoginition.interimResults = true;
+        const recognition = new window.webkitSpeechRecognition();
+        recognitionRef.current = recognition;
+        recognition.continuous = true;
+        recognition.lang = 'en-US';
+        recognition.interimResults = true;
 
+        recognition.onstart = () =>{
+          setIsRecording(true);
+          setAnswer('');
+          setQuestion('');
+        };
 
+        recognition.onresult = (event) => {
+          const lastResult = event.results[event.results.length - 1];
+          // handle interim; only act on final transcripts
+          if (!lastResult.isFinal) return;
 
-recoginition.onstart = () =>{
-  setIsRecording(true);
-  setAnswer('');
-  setQuestion('');
-};
+          const transcript = lastResult[0].transcript.trim();
+          setQuestion(transcript);
+          if (onQuestionChange) onQuestionChange(transcript);
+          try { recognition.stop(); } catch (e) {}
+          askGemini(transcript);
+        };
 
+        recognition.onerror = (event) => {
+          console.error('Error:', event.error);
+          setIsRecording(false);
+        };
 
-recoginition.onresult = (event) => {
-  const lastResult = event.results[event.results.length - 1];
-  if (!lastResult.isFinal) return;
+        recognition.onend = () => {
+          setIsRecording(false);
+        };
 
-  const transcript = lastResult[0].transcript;
-  setQuestion(transcript);
-  if (onQuestionChange) onQuestionChange(transcript);
-  recoginition.stop();
-  askGemini(transcript);
-};
-
-recoginition.onerror = (event) => {
-  console.error('Error:', event.error);
-  setIsRecording(false);
-};
-
-recoginition.onend = () => {
-  setIsRecording(false);
-};
-
-recoginition.start();
+        try {
+          recognition.start();
+        } catch (e) {
+          console.error('Recognition start error', e);
+        }
 
 
     }
@@ -155,14 +162,6 @@ return (
   </div>
 );
 
-
-
-
-
-
 }
-
-
-
 
 export default VoiceInput;

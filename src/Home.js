@@ -22,17 +22,19 @@ function Home() {
   const searchBarRef = useRef(null);
   const [showUser, setShowUser] = useState(false);
  
+  // ADD THIS: API base URL (use env or fallback to localhost)
+  const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
   useEffect(() => {
     const init = async () => {
       try {
-        // ✅ FIXED: Changed to Render URL
-        const authResponse = await axios.get("https://cookwithme.onrender.com/check-auth", {
+        // CHANGED: use API_BASE instead of hardcoded https://localhost:3001
+        const authResponse = await axios.get(`${API_BASE}/check-auth`, {
           withCredentials: true
         });
 
         if (authResponse.data.islogin) {
           setUser(authResponse.data.user);
-
           await fetchConversations();
 
           const savedConversation = localStorage.getItem('currentConversation');
@@ -54,8 +56,8 @@ function Home() {
     try {
       setLoading(true);
       setError(null);
-      // ✅ FIXED: Changed to Render URL
-      const response = await axios.get("https://cookwithme.onrender.com/getconversation", {
+      // CHANGED: use API_BASE
+      const response = await axios.get(`${API_BASE}/getconversation`, {
         withCredentials: true
       });
 
@@ -82,9 +84,9 @@ function Home() {
 
     try {
       setLoading(true);
-      // ✅ FIXED: Changed to Render URL
+      // CHANGED: use API_BASE
       const response = await axios.get(
-        `https://cookwithme.onrender.com/getconversation/${conversationId}/messages`,
+        `${API_BASE}/getconversation/${conversationId}/messages`,
         { withCredentials: true }
       );
 
@@ -128,7 +130,6 @@ function Home() {
   }, [homeAnswer]);
 
   const handelQuestion = async (e) => {
-    // Prefer the value coming from the triggering event (SearchBar synthetic submit)
     const incomingValue = e?.target?.value;
     const questionText = typeof incomingValue === 'string' ? incomingValue : homeQuestion;
 
@@ -140,7 +141,6 @@ function Home() {
       const userQuestion = questionText.trim();
       setHomeQuestion('');
   
-      // Add user question to messages immediately (temporary)
       const tempMessageId = `temp-${Date.now()}`;
       setConversationMessages(prev => [...prev, {
         id: tempMessageId,
@@ -148,9 +148,9 @@ function Home() {
         isTemp: true
       }]);
   
-      // ✅ FIXED: Changed to Render URL
+      // CHANGED: use API_BASE
       const response = await axios.post(
-        "https://cookwithme.onrender.com/ask-cooking-assistant",
+        `${API_BASE}/ask-cooking-assistant`,
         {
           question: userQuestion,
           conversationId: currentConversation?.id,
@@ -166,11 +166,9 @@ function Home() {
         };
         setCurrentConversation(newConversation);
         try { localStorage.setItem('currentConversation', JSON.stringify(newConversation)); } catch {}
-        // Ensure chat area shows the new conversation messages
         await fetchConversationMessages(newConversation.id);
       }
   
-      // Replace temp message with the assistant answer
       setConversationMessages(prev => [
         ...prev.filter(m => m.id !== tempMessageId),
         {
@@ -185,25 +183,19 @@ function Home() {
         speakResponse(response.data.answer);
       }
   
-      // Refresh conversations list in sidebar
       await fetchConversations();
     } catch (error) {
       console.error('Error:', error);
-      // Remove the temporary message if there's an error
       setConversationMessages(prev => prev.filter(m => !m.isTemp));
     } finally {
       setLoading(false);
     }
   };
 
-  function handleClick() {
-    setShow(!show);
-  }
-
   const handleLogout = async () => {
     try {
-      // ✅ FIXED: Changed to Render URL
-      const response = await axios.post('https://cookwithme.onrender.com/logout', {}, { withCredentials: true });
+      // CHANGED: use API_BASE
+      const response = await axios.post(`${API_BASE}/logout`, {}, { withCredentials: true });
       setUser(null);
       setConversations([]);
       setCurrentConversation(null);
@@ -251,7 +243,7 @@ function Home() {
               <span className="logoname bevellier">COOKWITHME</span>
             </div>
 
-            {!user ? (
+            {user ? (
               <div className="usericon">
                 <img src="user.png" alt="user" onClick={handelUserClick} />
                 {showUser && (

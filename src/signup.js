@@ -9,13 +9,17 @@ function Signup() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  // CHANGED: use env var or fallback to localhost backend
+  const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Signup attempt:', { username, password });
     
     try {
       const response = await axios.post(
-        "https://cookwithme.onrender.com/signup", 
+        // CHANGED: point to local server (or REACT_APP_API_URL)
+        `${API_BASE}/signup`, 
         {
           username,
           password

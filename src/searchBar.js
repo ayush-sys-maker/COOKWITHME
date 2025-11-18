@@ -13,6 +13,9 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
     const recognitionRef = useRef(null);
     const textareaRef = useRef(null);
 
+    // Use REACT_APP_API_URL or fallback to localhost backend
+    const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+
     // Speak function with better error handling
     const speak = (text) => {
     
@@ -66,9 +69,7 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
             adustheight();
            
         }
-    },[activeTimer],
-    [question]
-)
+    },[activeTimer, question])
     
     
     const setTimer = (command) => {
@@ -112,8 +113,8 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
 
     const checkAuth = async () => {
         try {
-            // ✅ FIXED: Changed to Render URL
-            const response = await axios.get('https://cookwithme.onrender.com/check-auth', { withCredentials: true });
+            // ✅ use API_BASE (local or env) instead of hardcoded Render URL
+            const response = await axios.get(`${API_BASE}/check-auth`, { withCredentials: true });
             if (!response.data.islogin) {
                 speak("Please login first");
                 return  false ;
@@ -230,7 +231,7 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
             handleSubmit(e);
         }
     };
-
+    
 
 
     const adustheight = () => {

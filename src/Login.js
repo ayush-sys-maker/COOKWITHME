@@ -9,16 +9,22 @@ function Login() {
   const [username,setusername] = useState("")
   const [password,setpassword] = useState("")
 
+  // Use REACT_APP_API_URL or fallback to localhost backend
+  const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+
   const handelsumbit = async(e)=>{
     e.preventDefault()
     try{
-      // CHANGE THIS LINE - use your Render backend URL
-      const response = await axios.post("https://cookwithme.onrender.com/login",{
-        username,
-        password
-      },{
+      const response = await axios.post(
+        `${API_BASE}/login`,
+        {
+          username,
+          password
+        },
+        {
           withCredentials: true
-      })
+        }
+      )
       if(response.data.success){
         window.location.href = '/'; 
       }
