@@ -6,7 +6,7 @@ import SearchBar from './searchBar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { GiHamburger } from "react-icons/gi";
-import VoiceInput from './voice';
+import VoiceInput from './voice.js';
 
 function Home() {
   const [show, setShow] = useState(false);
