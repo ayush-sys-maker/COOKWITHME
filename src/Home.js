@@ -129,6 +129,7 @@ function Home() {
     }
   }, [homeAnswer]);
 
+
   const handelQuestion = async (e) => {
     const incomingValue = e?.target?.value;
     const questionText = typeof incomingValue === 'string' ? incomingValue : homeQuestion;
