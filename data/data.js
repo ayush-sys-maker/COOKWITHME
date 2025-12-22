@@ -1,26 +1,22 @@
-import pg from "pg";
 import dotenv from "dotenv";
+import pkg from "pg";
 
+const { Pool } = pkg;
 dotenv.config();
 
-
-
-
-
-const { Pool } = pg;
-
-const pool = new Pool({
+const data = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: { rejectUnauthorized: false }
 });
 
-// Force public schema (Neon fix)
-pool.on("connect", async (client) => {
-  await client.query("SET search_path TO public");
-});
-
-
+// Optional: test connection (safe for Render)
+data.connect()
+  .then(client => {
+    console.log("✅ Connected to PostgreSQL (Neon)");
+    client.release();
+  })
+  .catch(err => {
+    console.error("❌ PostgreSQL connection error:", err.message);
+  });
 
 export default data;
