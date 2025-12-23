@@ -5,7 +5,8 @@ import axios from "axios";
 import session from "express-session";
 import bcrypt from "bcrypt";
 import connectPgSimple from "connect-pg-simple";
-
+import path from "path";
+import { fileURLToPath } from "url";
 // Import DB pool (Neon)
 import data from "./data/data.js";
 
@@ -14,6 +15,8 @@ dotenv.config();
 const app = express();
 const PgSession = connectPgSimple(session);
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 // Alias for clarity (optional but recommended)
 const pool = data;
 
@@ -47,6 +50,10 @@ app.use(session({
   }
 }));
 
+
+app.use(express.static(path.join(__dirname, "build")));
+
+
 /* -------------------- AUTH MIDDLEWARE -------------------- */
 
 const requireAuth = (req, res, next) => {
@@ -56,6 +63,10 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 /* -------------------- ROUTES -------------------- */
 
 // Health check
@@ -225,7 +236,10 @@ app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
 });
 
 // Root
-app.get("/", (_, res) => res.send("🍳 CookWithMe backend running"));
+app.get("/api/health", (req, res) => {
+  res.send("🍳 CookWithMe backend running");
+});
+
 
 // Start server
 const PORT = process.env.PORT || 3001;
