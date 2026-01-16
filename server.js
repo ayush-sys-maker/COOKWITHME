@@ -25,11 +25,14 @@ const pool = data;
 app.use(cors({
   origin: [
     "http://localhost:3000",
+    "http://localhost:3001",
     "http://localhost:3002",
-    // add your frontend live URL here later
+    "https://cookwithme.onrender.com" // only if this is frontend, not backend
   ],
-  credentials: true
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -64,7 +67,7 @@ const requireAuth = (req, res, next) => {
 };
 
 
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 /* -------------------- ROUTES -------------------- */
