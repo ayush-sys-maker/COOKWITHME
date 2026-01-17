@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import SearchBar from './searchBar';
+import SearchBar from './searchBar.js';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { GiHamburger } from "react-icons/gi";
