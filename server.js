@@ -50,7 +50,6 @@ app.use(session({
 }));
 
 
-app.use(express.static(path.join(__dirname, "build")));
 
 
 /* -------------------- AUTH MIDDLEWARE -------------------- */
@@ -63,9 +62,8 @@ const requireAuth = (req, res, next) => {
 };
 
 
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
+
+
 /* -------------------- ROUTES -------------------- */
 
 // Health check
