@@ -25,14 +25,10 @@ const pool = data;
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "http://localhost:3001",
-    "http://localhost:3002",
-    "https://cookwithme.onrender.com" // only if this is frontend, not backend
+    "https://mycookingassistant.netlify.app"
   ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+  credentials: true
 }));
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
