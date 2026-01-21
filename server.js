@@ -44,8 +44,8 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "lax",
-    secure: false
+    sameSite: "none",
+    secure: true
   }
 }));
 
@@ -149,11 +149,11 @@ app.post("/logout", (req, res) => {
 });
 
 // Check auth
-app.get("/check-auth", (req, res) => {
+app.get("/check-auth",  (req, res) => {
   res.json({
     islogin: !!req.session.user,
     user: req.session.user || null
-  });
+  })
 });
 
 // Get conversations
