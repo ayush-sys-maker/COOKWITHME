@@ -22,6 +22,9 @@ const pool = data;
 
 /* -------------------- MIDDLEWARE -------------------- */
 
+
+
+
 app.use(cors({
   origin:"https://mycookingassistant.netlify.app"
   ,
@@ -30,6 +33,10 @@ app.use(cors({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+app.set('trust proxy', 1);
+
 
 app.use(session({
   store: new PgSession({
