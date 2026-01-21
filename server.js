@@ -23,10 +23,8 @@ const pool = data;
 /* -------------------- MIDDLEWARE -------------------- */
 
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://mycookingassistant.netlify.app"
-  ],
+  origin:"https://mycookingassistant.netlify.app"
+  ,
   credentials: true
 }));
 
