@@ -32,7 +32,7 @@
     width: 160px;
     height: 40px;
     font-size: 12px;
-      background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%);
+    background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%);
 
   }
 }
@@ -295,11 +295,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+   border-radius: 15px;
+     background-color: #373c3e;
+
 }
 
 .searchbar {
   max-width: 500px;
+ 
+
 }
+
 
 @media (max-width: 480px) {
   .searchbar {
@@ -453,12 +459,13 @@ textarea:focus::placeholder {
   width: 32px;
   height: 32px;
   cursor: pointer;
+  margin-top: 25px;
   
 }
 
 .dropdown-auth {
   position: absolute;
-  top: 40px;
+  top: 70px;
   right: 0;
   background-color: white;
   padding: 10px;
@@ -484,4 +491,9 @@ textarea:focus::placeholder {
 
 .signlogin a {
   margin-right: 10px;
+}
+
+
+.login{
+margin: auto;
 }

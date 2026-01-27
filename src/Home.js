@@ -10,6 +10,7 @@ import VoiceInput from './voice.js';
 import RecipeCard from './recipe.js';
 import Particles from './start_bg.js';
 import './button.css';
+import { FaUserCircle } from "react-icons/fa";
 
 function Home() {
   const [show, setShow] = useState(false);
@@ -262,7 +263,7 @@ function Home() {
 
           {/* MOBILE AUTH */}
           <div className="mobile-auth d-lg-none position-relative">
-            <img src="user.png" alt="user" onClick={handelUserClick} className="user-icon" />
+            <FaUserCircle color="white"  onClick={handelUserClick}className="user-icon" />
             {showUser && (
               <div className="dropdown-auth">
                 {user ? (
