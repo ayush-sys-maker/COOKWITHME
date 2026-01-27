@@ -12,6 +12,10 @@ import data from "./data/data.js";
 
 dotenv.config();
 
+console.log("Loaded key:", process.env.OPENROUTER_API_KEY);
+
+
+
 const app = express();
 const PgSession = connectPgSimple(session);
 
@@ -26,7 +30,7 @@ const pool = data;
 
 
 app.use(cors({
-  origin:"https://mycookingassistant.netlify.app"
+  origin:"http://localhost:3002"
   ,
   credentials: true
 }));
@@ -49,8 +53,8 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "none",
-    secure: true
+    sameSite: "lax",
+    secure: false  // Set to true if using HTTPS
   }
 }));
 
@@ -208,13 +212,47 @@ app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
       );
       convoId = result.rows[0].id;
     }
+    
+    const systemPrompt = `
+You are a professional cooking assistant that returns recipes in JSON format only.
+
+When the user asks for a recipe, respond using this exact JSON structure:
+
+{
+  "title": string,
+  "description": string (3-4 lines about origin, cultural background, why it is famous, and health benefits),
+  "nutrition": {
+    "calories": string (e.g. "562 kcal"),
+    "protein": string (e.g. "30g"),
+    "fat": string (e.g. "12g")
+  },
+  "servings": number,
+  "time": {
+    "prep": string (e.g. "10 min"),
+    "cook": string (e.g. "25 min"),
+    "total": string (e.g. "35 min")
+  },
+  "ingredients": [
+    { "item": string, "quantity": string }
+  ],
+  "steps": [
+    string (each step clear and actionable)
+  ]
+}
+
+Rules:
+- Only return valid JSON.
+- Do not include backticks, markdown, or text outside the JSON.
+- If any value is unknown, estimate reasonably.
+- Steps must be clear and actionable.
+`;
 
     const ai = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
         model: "anthropic/claude-3-haiku",
         messages: [
-          { role: "system", content: "Answer in 3–4 short bullet points." },
+          { role: "system", content: systemPrompt },
           { role: "user", content: question }
         ]
       },
@@ -225,15 +263,26 @@ app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
       }
     );
 
-    const answer = ai.data.choices[0].message.content;
+      let recipe;
+    try {
+      recipe = JSON.parse(ai.data.choices[0].message.content);
+    } catch (err) {
+      return res.status(500).json({ error: "Invalid JSON returned by AI" });
+    }
 
-    await pool.addchat(userId, question, answer, convoId);
+    await pool.addchat(userId, question, recipe, convoId);
+    console.log("Recipe from backend:", recipe);
 
-    res.json({ success: true, answer, conversationId: convoId });
+
+    res.json({ success: true, recipe, conversationId: convoId });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "AI request failed" });
+     console.error("OpenRouter Error Response:", err.response?.data);
+  console.error("OpenRouter Error Message:", err.message);
+  console.error("OpenRouter Error Config:", err.config?.data);
+  return res.status(500).json({ 
+    error: err.response?.data || err.message 
+  });
   }
 });
 

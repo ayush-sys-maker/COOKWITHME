@@ -5,12 +5,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 function Signup() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
   // CHANGED: use env var or fallback to localhost backend
-  const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3002';
+  const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -62,7 +63,7 @@ function Signup() {
             
             <form onSubmit={handleSubmit}>
               <input 
-                className='form-control mb-4 mt-4 bg-transparent border-1' 
+                className='form-control mb-4 mt-4  border-1' 
                 value={username} 
                 onChange={(e) => setUsername(e.target.value)} 
                 type="text" 
@@ -70,7 +71,7 @@ function Signup() {
                 required
               />
               <input 
-                className='form-control mb-4 mt-4 bg-transparent border-1' 
+                className='form-control mb-4 mt-4  border-1' 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)} 
                 type="password" 
@@ -78,11 +79,11 @@ function Signup() {
                 required
               />
               <button 
-                className='btn btn-success d-flex justify-content-center align-items-center ms-auto me-auto' 
+                className='btn-grad-logout d-flex justify-content-center align-items-center ms-auto me-auto' 
                 type="submit"
               >
                 Sign Up
-              </button>
+              </button  >
               <p className='mt-4 ms-auto me-auto text-center'>
                 Already have an account? <Link to="/login">Login</Link>
               </p>

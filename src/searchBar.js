@@ -264,7 +264,8 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
                                 overflow: 'hidden',
                                 resize: 'none',
                                 minHeight: '40px',
-                                maxHeight: '150px'
+                                maxHeight: '150px',
+                                
                             }}
             
                         />

@@ -1,347 +1,255 @@
+/* GLOBAL FIX */
+* {
+  box-sizing: border-box;
+}
+
+/* ================= BRANDNAME ================= */
 .brandname {
-    margin-top: 25px;
-    background-color: #01ab0186;
-    width: 180px;
+  margin-top: 25px;
+  width: 180px;
+  height: 45px;
+  border-radius: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: 'Gill Sans','Gill Sans MT',Calibri,'Trebuchet MS',sans-serif;
+  background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%);
+  color: white;
+  margin-left: auto !important;
+  margin-right: auto !important; /* centered on all screens */
+}
+
+@media (min-width: 480px) {
+  .brandname {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brandname {
+    width: 160px;
     height: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    text-align: center;
-    display: flex;
-    margin-left: 0px;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12px;
+      background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%);
+
+  }
+}
+
+/* ================= AUTH BRANDNAME ================= */
+.authbrandname {
+  margin-top: 25px;
+  width: 170px;
+  height: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-family: 'Gill Sans','Gill Sans MT',Calibri,'Trebuchet MS',sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%)!important;
+  color: white!important;
 }
 
 @media (min-width: 480px) {
-    .brandname {
-        margin-left: 600px;
-        font-size: 20px;
-    }
-    .mobuser{
-      display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .brandname {
-        width: 140px;
-        height: 30px;
-        font-size: 12px;
-        margin-left: 70px;
-      
-    }
-
-    .mobuser{
-     display: flex;
-     flex-direction: column;
-   position: absolute;
-   top: 65px;
-   right: 25px;
-   background-color: #40a440;
-   padding: 10px;
-   border-radius: 10px;
-   text-decoration: none;
-   color: black;
-    }
- .logoutbtn{
-
-  width: 60px;
-  height: 30px;
-  font-size: 20px;
-  
- }
-}
-
-
-
-
-
-.authbrandname{
-    margin-top: 25px;
-    background-color: #01ab0186;
-    width: 170px;
-    height: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    text-align: center;
-    display: flex;
-    margin-left: 0px;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-@media (min-width: 480px) {
-    .authbrandname {
-        margin-left: 600px;
-        font-size: 18px;
-        font-family: 'tabular', sans-serif;
-    }
-}
-
-@media (max-width: 480px) {
-    .authbrandname {
-        width: 150px;
-        height: 35px;
-        font-size: 12px;
-        font-family: 'tabular', sans-serif;
-        }
-}
-
-.bi{
-    font-size: 25px;
-    @media (max-width: 480px) {
-     font-size:20px;
-    }
-
-  }
-
-  @media (max-width: 480px){
-    .hamburger-btn{
-      margin-top: 20px;
-  background-color: transparent;
-   border-radius: 10%;
-   border: none;
-   margin-left: px;
-   font-size: 23px;
-text-align: center;
-
-    }
-  }
-@media (min-width: 480px){
-  .hamburger-btn{
-    display: none;
-  
+  .authbrandname {
+    font-size: 18px;
+    font-family: 'tabular',sans-serif;
   }
 }
 
-.searchbar{
+@media (max-width: 480px) {
+  .authbrandname {
+    width: 150px;
+    height: 35px;
+    font-size: 12px;
+    font-family: 'tabular',sans-serif;
+  }
+}
+
+/* ================= ICONS ================= */
+.bi {
+  font-size: 25px;
+}
 
 @media (max-width: 480px) {
-width: 75%;
-background-color: #01ab0186;
-padding: 5px;
-border-radius: 20px;
-min-height: 50px;
-max-height: auto;
+  .bi {
+    font-size: 20px;
+  }
 }
 
-@media (min-width: 480px) {
-width: 50%;
-background-color: #01ab0186;
-padding: 5px;
-border-radius: 20px;
-min-height: 50px;
-max-height: auto;
-}
-
-}
-
-
-.voiceimg{
-
+.voiceimg {
   width: 40px;
   height: 40px;
-  border:   1px solid #0e510e;
-padding: 5px;
-border-radius: 50%;
+  padding: 5px;
+  border-radius: 50%;
 }
 
+/* ================= HAMBURGER BUTTON ================= */
+@media (max-width: 480px) {
+  .hamburger-btn {
+    margin-top: 20px;
+    background-color: transparent;
+    border-radius: 10%;
+    border: none;
+    font-size: 23px;
+    text-align: center;
+    color: white !important; /* make white */
+  }
+}
 
-.usericon > img{
- width: 30px;
- height: 30px;
- margin-top: 25px;
- margin-left: 60px;
 @media (min-width: 480px) {
-display: none;
-}
-  
-
- 
+  .hamburger-btn {
+    display: none;
+  }
 }
 
-.container{
+/* ================= MOBILE USER MENU ================= */
+@media (max-width: 480px) {
+  .mobuser {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 65px;
+    right: 25px;
+    background-color: #40a440;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+  }
+
+  .logoutbtn {
+    width: 60px;
+    height: 30px;
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 480px) {
+  .mobuser {
+    display: none;
+  }
+}
+
+/* ================= USER ICON ================= */
+.usericon > img {
+  width: 30px;
+  height: 30px;
+  margin-top: 25px;
+  margin-left: 60px;
+}
+
+@media (min-width: 480px) {
+  .usericon > img {
+    display: none;
+  }
+}
+
+/* ================= CONTAINER ================= */
+.container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-
-
-
-.card{
-
-
-  margin-left: 500px;
-  margin-top: 180px;
-
-
-
-  @media (max-width: 480px) {
-    margin-top: 150px;
-    margin-left: 30px;
-    width: 18rem ;
-    height: 24rem ;
-  }
-
+/* ================= CARD ================= */
+.card {
+  margin: 180px auto 0 auto; /* center desktop */
+  background-image: linear-gradient(to right,#000000 0%,#434343 51%,#000000 100%);
 }
 
-.card-body{
+@media (max-width: 480px) {
+  .card {
+    margin-top: 150px;
+    width: 18rem;
+    height: 24rem;
+  }
+}
 
+.card-body {
   width: 20rem;
   height: 25rem;
 }
 
-.userdesk{
-display: flex;
-justify-content: end;
-margin-top: -90px;
-margin-right: 50px;
+/* ================= USER DESKTOP ================= */
+.userdesk {
+  display: flex;
+  justify-content: end;
+  margin-top: -90px;
+  margin-right: 50px;
+}
+
 @media (max-width: 480px) {
-  display: none;
+  .userdesk {
+    display: none;
+  }
 }
 
-
-}
-  
-
+/* ================= OFFCANVAS ================= */
 @media (min-width: 480px) {
   .offcanvas-backdrop {
     display: none !important;
   }
-  
-  /* Make offcanvas always visible and static */
+
   .offcanvas {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: none !important;
-    pointer-events: auto !important;
- 
+    opacity: 1!important;
+    visibility: visible!important;
+    transform: none!important;
+    pointer-events: auto!important;
   }
- 
 }
 
-@media (min-width: 992px) { /* Bootstrap's 'lg' breakpoint */
+@media (min-width: 992px) {
   .offcanvas.offcanvas-start {
-    width: 300px !important; /* Custom width for desktop */
-   background-color: #62bc6b;
+    width: 300px !important;
   }
 }
 
-/* AIBall.css */
-.ai-ball {
-  position: fixed;
-  bottom: 250px;
-    right: 600px;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(135deg, #6f86d6, #48c6ef);
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-  box-shadow: 0 0 20px rgba(72, 198, 239, 0.5);
-  z-index: 999;
-  @media (max-width: 480px) {
-    position: fixed;
-    bottom: 300px;
-    right: 120px;
-    width: 150px;
-    height: 150px;
-  }
-}
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.9;
-  }
+.offcanvas {
+  background-color: #1B1B1B!important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-
-.close{
-
-    
-position: fixed;
-bottom: 40px;
-right: 720px;
-border: 1px solid #0e510e;
-border-radius: 50%;
-background-color: #83ca83;
-font-size: 45px;
-cursor: pointer;
-color: black;
-
-
-
-
-@media(max-width: 480px) {
-  position: fixed;
-bottom: 50px;
-right: 160px;
+.offcanvas::-webkit-scrollbar {
+  display: none;
 }
 
+.offcanvas-title {
+  color: rgb(252,251,251)!important;
+  background-color: #666666!important;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: medium;
+  margin-left: 40px;
+  background-image: linear-gradient(to right,#232526 0%,#414345 51%,#232526 100%);
 }
 
-
-.hello{
-  margin-top: 200px;
-   font-size: 4vh;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-
-.you{
-  @media (max-width: 480px) {
-
-    margin-left: 20px;
-    margin-top: 40px;
-  }
-  @media (min-width: 480px) {
-    margin-left: 400px;
-    margin-top: 40px;
-  }
-}
-
-.assistant{
-  @media (max-width: 480px) {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  @media (min-width: 480px) {
-    margin-left: 400px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-}
-
+/* ================= CHAT AREA ================= */
 .chatarea {
   height: 70vh;
   max-width: 1100px;
   margin: 20px auto;
-  margin-left: 300px;
-  margin-right: 50px;
   padding: 20px;
   overflow-y: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
-  @media (max-width: 480px) {
-    margin-left: 10px;
-max-width: 100%;
-
-}
 }
 
+@media (max-width: 480px) {
+  .chatarea {
+    margin: 10px;
+    max-width: 100%;
+  }
+}
+
+/* ================= CHAT BUBBLES ================= */
 .message-item {
   margin-bottom: 15px;
 }
@@ -354,11 +262,11 @@ max-width: 100%;
 }
 
 .you {
-  background: #e3f2fd;
+  background: #b9c6d0;
   margin-left: auto;
   margin-right: 0;
   border-bottom-right-radius: 4px;
-  font-family: 'ranade', sans-serif;
+  font-family: 'ranade',sans-serif;
 }
 
 .assistant {
@@ -366,225 +274,214 @@ max-width: 100%;
   margin-right: auto;
   margin-left: 0;
   border-bottom-left-radius: 4px;
-  font-family: 'satoshi', sans-serif;
-  @media (max-width: 480px) {
-    width: 100%;
-    
-}
+  font-family: 'satoshi',sans-serif;
 }
 
+@media (max-width: 480px) {
+  .assistant {
+    width: 100%;
+  }
+}
+
+/* ================= TEXT CENTER ================= */
 .text-center {
   text-align: center;
   color: #666;
   padding: 20px;
 }
 
-@media (max-width: 480px) {
-  .signlogin{
-    display: none;
-  }
-  
-}
-
-
-.signlogin{
-margin-top: 20px;
-
-}
-
-.signlogin > .btn{
-margin-left: 10px;
-
-}
-
-
-.search{
+/* ================= SEARCHBAR ================= */
+.search {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
-
-.bevellier{
-  font-family: 'tabular', sans-serif;
-  font-weight: 900;
-}
-
-.ranade{
-  font-family: 'ranade', sans-serif;
-}
-
-
-.offcanvas{
-  scrollbar-width: none;
-  -ms-overflow-style: none;  
-}
-  
-.offcanvas::-webkit-scrollbar {
-  display: none;
-}
-
-
-
-
-/* Ensure the offcanvas body can scroll */
-.offcanvas-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  overflow-y: auto;
-}
-
-.list-group-item.active{
-  background-color: #59c664 !important;
-  color: black !important;
-}
-  
-
-
-.searchbar{
+.searchbar {
   max-width: 500px;
 }
 
 @media (max-width: 480px) {
-  .searchbar{
-    max-width:700px;
- 
+  .searchbar {
+    max-width: 700px;
   }
-  
-  
 }
-@media (max-width: 480px) {
 
-.nomsg{
- position: absolute;
- top: 40%;
- left: 50%;
- transform: translate(-50%, -50%);
- width: 100%;
+textarea:focus::placeholder {
+  color: #d4cdcd;
 }
+
+/* ================= LOGO ================= */
+@media (min-width: 480px) {
+  .logo>img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .logoname {
+    font-size: 18px!important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo>img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logoname {
+    font-size: 16px;
+  }
+}
+
+/* ================= AI BALL ================= */
+.ai-ball {
+  position: fixed;
+  bottom: 15%;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg,#6f86d6,#48c6ef);
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 20px rgba(72,198,239,0.5);
+  z-index: 999;
+}
+
+@media (max-width: 480px) {
+  .ai-ball {
+    bottom: 100px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@keyframes pulse {
+  0% {transform: scale(1);opacity: 1;}
+  50% {transform: scale(1.2);opacity: 1;}
+  100% {transform: scale(1);opacity: 0.9;}
+}
+
+/* ================= CLOSE BUTTON ================= */
+.close {
+  position: fixed;
+  bottom: 40px;
+  right: 10%;
+  border: 1px solid #071207;
+  border-radius: 50%;
+  background-color: grey;
+  font-size: 45px;
+  cursor: pointer;
+  color: black;
+}
+
+@media(max-width: 480px) {
+  .close {
+    bottom: 50px;
+    right: 20px;
+  }
+}
+
+/* ================= NOMSG ================= */
+@media (max-width: 480px) {
+  .nomsg {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+  }
 }
 
 @media (min-width: 480px) {
-  .nomsg{
+  .nomsg {
     position: absolute;
     top: 40%;
     left: 54%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
     width: 100%;
-   }
-
-.logo>img{
-  width:35px;
-  height:35px;
-  margin-top:"-5px";
-
-
-}
-
-.logoname{
- font-size: 20px;
- margin-left: -1px;
- margin-top: 3px;
-
-}
-
-
-
-
-
-}
-
-@media (max-width: 480px) {
-  .logo>img{
- width: 22px;
- height: 22px;
- margin-top:"-10px";
   }
-
-  .logoname{
-    font-size: 16px;
 }
 
+/* ================= TEXT FONTS ================= */
+.bevellier {font-family: 'tabular',sans-serif;font-weight: 900;}
+.ranade {font-family: 'ranade',sans-serif;}
+
+/* ================= LIST GROUP ================= */
+.list-group-item.active {
+  background-color: rgba(58,55,55,0.512)!important;
+  color: whitesmoke!important;
+  opacity: 0.9!important;
 }
 
-
-
-.loading{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.list-group-item {
+  color: white!important;
+  opacity: 0.5;
+  font-family: 'tabular',sans-serif;
 }
 
-.pan {
-  position: relative;
-  width: 120px;
-  height: 60px;
-  background: #555;
-  border-radius: 60px 60px 20px 20px;
-  animation: shake 1s infinite ease-in-out;
-}
-.handle {
-  position: absolute;
-  right: -50px;
-  top: 15px;
-  width: 50px;
-  height: 15px;
-  background: #444;
-  border-radius: 10px;
+/* ================= SIGN LOGIN ================= */
+.signlogin {
+  display: flex !important;
+  text-decoration: none!important;
+  margin-top: 20px;
 }
 
-.food {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-  width: 80px;
-  height: 25px;
-  background: orange;
-  border-radius: 50%;
-  animation: boil 1s infinite alternate;
+.signlogin > .btn {
+  margin-left: 10px;
 }
 
-.steam {
-  position: absolute;
-  bottom: 60px;
-  left: 50%;
-  width: 8px;
-  height: 25px;
-  background: rgba(200,200,200,0.7);
-  border-radius: 50%;
-  animation: rise 2s infinite;
+/* ================= FORM CONTROL ================= */
+.form-control {
+  color: white!important;
 }
 
-
-
-.steam1 { animation-delay: 0s; }
-.steam2 { animation-delay: 0.5s; left: 40%; }
-.steam3 { animation-delay: 1s; left: 60%; }
-
-
-/* Animations */
-@keyframes shake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  75% { transform: rotate(-2deg); }
-}
-
-@keyframes boil {
-  from { transform: scale(1); }
-  to { transform: scale(1.2); }
-}
-
-@keyframes rise {
-  0% { transform: translateY(0) scale(1); opacity: 0.7; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
-}
-
-/* Smaller Logout button on phones */
+/* ================= OUTBTN ================= */
 @media (max-width: 576px) {
   .outbtn {
     display: none;
   }
+}
+
+
+
+
+
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  
+}
+
+.dropdown-auth {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.13);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+}
+
+.dropdown-auth a,
+.dropdown-auth button {
+  border: none;
+  background: none;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+    text-decoration: none;
+
+}
+
+.signlogin a {
+  margin-right: 10px;
 }
