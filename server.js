@@ -30,7 +30,7 @@ const pool = data;
 
 
 app.use(cors({
-  origin:"http://localhost:3002"
+  origin: process.env.REACT_APP_FRONTEND_URL || 'http://localhost:3000'
   ,
   credentials: true
 }));

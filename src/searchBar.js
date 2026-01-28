@@ -245,7 +245,7 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
 
     return (
         <div className="searchbar shadow-lg fixed-bottom mb-3 mx-auto" >
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center  searchbar-child ">
                 <form onSubmit={handleSubmit} className="w-100">
                     <div className="search">
                         <textarea
