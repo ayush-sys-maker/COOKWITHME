@@ -30,8 +30,8 @@ const pool = data;
 
 
 app.use(cors({
-  origin: "https://mycookingassistant.netlify.app",
-
+  origin:'https://mycookingassistant.netlify.app'
+  ,
   credentials: true
 }));
 
@@ -54,7 +54,7 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
     sameSite: "none",
-    secure:true   // Set to true if using HTTPS
+    secure: true  // Set to true if using HTTPS
   }
 }));
 

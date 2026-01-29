@@ -271,7 +271,7 @@ const SearchBar = forwardRef(({ onQuestionChange, onAnswerChange, currentConvers
                         />
                         <button 
                             className="btn btn-transparent border-0 fs-4   " 
-                            type="submit"
+                            type="button"
                             disabled={!question.trim()}
                         >
                             <FaArrowUp    />

@@ -440,7 +440,9 @@ textarea:focus::placeholder {
 
 /* ================= FORM CONTROL ================= */
 .form-control {
-  color: white!important;
+  color: rgb(5, 4, 4)!important;
+  background-color: #e8e6e6!important;
+
 }
 
 /* ================= OUTBTN ================= */
@@ -496,4 +498,22 @@ textarea:focus::placeholder {
 
 .login{
 margin: auto;
+}
+
+.cls-btn{
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  left: 260px;
+}
+
+
+@media (max-width: 480px) {
+ .cls-btn{
+    left: 350px;
+  }
+
+  .offcanvas-title{
+    margin-left: 50px;
+  }
 }

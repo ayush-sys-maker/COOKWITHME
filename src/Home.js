@@ -11,6 +11,7 @@ import RecipeCard from './recipe.js';
 import Particles from './start_bg.js';
 import './button.css';
 import { FaUserCircle } from "react-icons/fa";
+import { IoCloseSharp } from "react-icons/io5";
 
 function Home() {
   const [show, setShow] = useState(false);
@@ -300,7 +301,7 @@ function Home() {
             <img src="COOKWITHME-LOGO.png" style={{ width: "30px", height: "30px" }} alt="logo" className="me-2" />
             COOKWITHME
           </h5>
-          <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+         <IoCloseSharp className='cls-btn' color='grey'data-bs-dismiss="offcanvas" aria-label="Close" />
         </div>
 
         <div className="offcanvas-body">

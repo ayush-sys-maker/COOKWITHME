@@ -43,8 +43,8 @@ function Login() {
               <p className="mt-3"    > <span  className='logoimg'  ><img src="COOKWITHME-LOGO.png" style={{width:"30px",height:"30px",  marginTop:"-10px",  }} alt="logo" className="me-2" /></span><span className='logoname   '>COOKWITHME</span></p>
             </div>
             <form onSubmit={handelsumbit}  >
-              <input  className='form-control mb-4  mt-4 bg-transparent border-1 ' value={username} onChange={(e)=>setusername(e.target.value)} type="text" placeholder="Username" />
-              <input className='form-control mb-4 mt-4 bg-transparent border-1 ' value={password} onChange={(e)=>setpassword(e.target.value)} type="password" placeholder="Password" />
+              <input  className='form-control mb-4  mt-4  border-1 ' value={username} onChange={(e)=>setusername(e.target.value)} type="text" placeholder="Username" />
+              <input className='form-control mb-4 mt-4  border-1 ' value={password} onChange={(e)=>setpassword(e.target.value)} type="password" placeholder="Password" />
               <button className='btn-grad-logout  d-flex justify-content-center align-items-center ms-auto me-auto' type="submit">Login</button>
               <p className='mt-4   ms-auto me-auto  text-center'>Don't have an account? <Link to="/signup">Sign Up</Link></p>
             </form>
