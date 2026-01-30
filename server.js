@@ -204,7 +204,7 @@ app.get("/getconversation/:id/messages", requireAuth, async (req, res) => {
 
 
 // Get conversations
-pp.get("/getconversation", requireAuth, async (req, res) => {
+app.get("/getconversation", requireAuth, async (req, res) => {
   try {
     const result = await pool.query(
       `SELECT id, title, created_at
