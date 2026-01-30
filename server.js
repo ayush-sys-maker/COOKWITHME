@@ -204,37 +204,26 @@ app.get("/getconversation/:id/messages", requireAuth, async (req, res) => {
 
 
 // Get conversations
-app.get("/getconversation", requireAuth, async (req, res) => {
+pp.get("/getconversation", requireAuth, async (req, res) => {
   try {
-    const result = await pool.query(`
-      SELECT c.id, c.title, c.created_at,
-        COALESCE(
-          json_agg(
-            json_build_object(
-              'id', ch.id,
-              'question', ch.question,
-              'recipe', ch.answer,
-              'created_at', ch.created_at
-            )
-            ORDER BY ch.created_at
-          ) FILTER (WHERE ch.id IS NOT NULL),
-          '[]'
-        ) AS messages
-      FROM conversation c
-      LEFT JOIN chathistory ch ON c.id = ch.conversation_id
-      WHERE c.user_id = $1
-      GROUP BY c.id
-      ORDER BY c.created_at DESC
-    `, [req.session.user.id]);
+    const result = await pool.query(
+      `SELECT id, title, created_at
+       FROM conversation
+       WHERE user_id = $1
+       ORDER BY created_at DESC`,
+      [req.session.user.id]
+    );
 
-    res.json({ success: true, conversations: result.rows });
+    res.json({
+      success: true,
+      conversations: result.rows
+    });
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch conversations" });
   }
 });
-
 // Ask cooking assistant
 app.post("/ask-cooking-assistant", requireAuth, async (req, res) => {
   try {
