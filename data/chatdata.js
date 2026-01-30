@@ -17,7 +17,7 @@ async getchats(user_id){
 
 
 
-async addchat(user_id, question,answer,conversation_id){
+async addchat(user_id, question,recipe,conversation_id){
     try {
         const result = await data.query('INSERT INTO chathistory (user_id,question,answer,conversation_id) VALUES ($1,$2,$3,$4) RETURNING *'  , [user_id,question,answer,conversation_id]);
         console.log('chat added successfully:',result.rows[0]);

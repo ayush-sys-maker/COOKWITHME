@@ -165,6 +165,44 @@ app.get("/check-auth",  (req, res) => {
   })
 });
 
+
+
+
+app.get("/getconversation/:id/messages", requireAuth, async (req, res) => {
+  const { id } = req.params;
+
+  const result = await pool.query(
+    `SELECT id, question, answer, created_at
+     FROM chathistory
+     WHERE conversation_id = $1
+     ORDER BY created_at ASC`,
+    [id]
+  );
+
+  const messages = result.rows.map(row => ({
+    id: row.id,
+    question: row.question,
+    recipe: typeof row.answer === "string"
+      ? JSON.parse(row.answer)
+      : row.answer
+  }));
+
+  res.json({ messages });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Get conversations
 app.get("/getconversation", requireAuth, async (req, res) => {
   try {
@@ -175,7 +213,7 @@ app.get("/getconversation", requireAuth, async (req, res) => {
             json_build_object(
               'id', ch.id,
               'question', ch.question,
-              'answer', ch.answer,
+              'recipe', ch.answer,
               'created_at', ch.created_at
             )
             ORDER BY ch.created_at

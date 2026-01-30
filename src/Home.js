@@ -95,8 +95,9 @@ function Home() {
         { withCredentials: true }
       );
 
-      const messages = response.data.messages || response.data.conversations || [];
-      setConversationMessages(messages);
+const messages = response.data.messages || [];
+console.log("Loaded messages:", messages);
+setConversationMessages(messages);
     } catch (error) {
       console.error("Error fetching messages:", error);
       setConversationMessages([]);
@@ -186,7 +187,7 @@ function Home() {
       ]);
   
       if (response.data.recipe) {
-        speakResponse(response.data.recipe.steps);
+        speakResponse(response.data.recipe.steps.join('. '));
       }
   
       await fetchConversations();
@@ -359,11 +360,9 @@ function Home() {
           conversationMessages.map((msg, index) => (
             <div key={msg.id || `msg-${index}`} className="message-item">
               {msg.question && <p className="you"><strong>You:</strong> {msg.question}</p>}
-              {msg.recipe ? (
-                <RecipeCard recipe={msg.recipe} />
-              ) : (
-                msg.answer && <p className="assistant"><strong>Assistant:</strong> {msg.answer}</p>
-              )}
+             {msg.recipe && (
+  <RecipeCard recipe={msg.recipe} />
+)}
             </div>
           ))
         )}
